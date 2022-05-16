@@ -13,24 +13,6 @@
 #include <ArduinoJson.h>
 
 
-//Pagina HTML
-String pral = "<html>"
-              "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"
-              "<title>WIFI CONFIG</title> <style type='text/css'> body,td,th { color: #036; } body { background-color: #999; } </style> </head>"
-              "<body> "
-              "<h1>WIFI CONF</h1><br>"
-              "<form action='config' method='get' target='pantalla'>"
-              "<fieldset align='left' style='border-style:solid; border-color:#336666; width:200px; height:180px; padding:10px; margin: 5px;'>"
-              "<legend><strong>Configurar WI-FI</strong></legend>"
-              "NOMBRE DE RED: <br> <input name='ssid' type='text' size='15'/> <br><br>"
-              "CLAVE: <br> <input name='pass' type='password' size='15'/> <br><br>"
-              "<input type='submit' value='Comprobar conexion' />"
-              "</fieldset>"
-              "</form>"
-              "<iframe id='pantalla' name='pantalla' src='' width=900px height=400px frameborder='0' scrolling='no'></iframe>"
-              "</body>"
-              "</html>";
-
 
 //defines the I2C pins to which the display is connected
 #define OLED_SDA 21
@@ -55,11 +37,6 @@ Adafruit_SSD1306 display(ANCHO, ALTO, &Wire, -1);
 
 const char *ssid = "Guille2.4";
 const char *password = "Guille2360";
-
-
-String nombrered ="red";
-String pass="pass";
-
 
 
 IPAddress ip(192,168,1,4);     
