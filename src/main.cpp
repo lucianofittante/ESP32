@@ -685,15 +685,15 @@ void setup()   {
     request->send(SPIFFS, "/index.html", String(), false, processor);
   });
   //  OTRAS RUTAS DE ACCESO EN LA WEB
-    server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/style.css", String(), false, processor);
+    server.on("/style-index.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/style-index.css", String(), false, processor);
   });
     server.on("/config", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/config.html", String(), false, processor);
     leerConfiguracion();
   });
    server.on("/grafica", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/grafica.html", String(), false, processor);
+    request->send(SPIFFS, "/graficas.html", String(), false, processor);
   });
   server.on("/data.txt", HTTP_GET, [](AsyncWebServerRequest *request){
    request->send(SPIFFS, "/data.txt", String(), false, processor);
@@ -856,8 +856,6 @@ void setup()   {
 
   //////////// carga de parametros de la contraseña y el nombre de la red/////////////
 
-
-  
   server.begin();
 
 
