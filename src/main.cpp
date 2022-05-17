@@ -682,12 +682,31 @@ void setup()   {
   Serial.println(WiFi.localIP());
   // Route for root / web page
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/index.html", String(), false, processor);
+    request->send(SPIFFS, "/index.html",String(), false, processor);
   });
   //  OTRAS RUTAS DE ACCESO EN LA WEB
-    server.on("/style-index.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/style-index.css", String(), false, processor);
+    server.on("/styleindex.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/styleindex.css");
   });
+    server.on("/reset.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/reset.css");
+  });
+
+  // envio de imagenes//
+  
+    server.on("/image/chalas.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/image/chalas.jpg");
+  });
+    server.on("/image/configurar.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/image/configurar.jpg");
+  });
+    server.on("/image/red.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/image/red.jpg");
+  });
+    server.on("/image/graficas.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/image/graficas.jpg");
+  });
+  
     server.on("/config", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/config.html", String(), false, processor);
     leerConfiguracion();
@@ -697,6 +716,9 @@ void setup()   {
   });
   server.on("/data.txt", HTTP_GET, [](AsyncWebServerRequest *request){
    request->send(SPIFFS, "/data.txt", String(), false, processor);
+  });
+  server.on("/data.json", HTTP_GET, [](AsyncWebServerRequest *request){
+   request->send(SPIFFS, "/data.json");
   });
   // PASO DE VARIABLES
     server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
