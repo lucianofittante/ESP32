@@ -39,6 +39,7 @@ const char *ssid = "Guille2.4";
 const char *password = "Guille2360";
 
 
+
 IPAddress ip(192,168,1,4);     
 IPAddress gateway(192,168,1,1);   
 IPAddress subnet(255,255,255,0); 
@@ -130,11 +131,11 @@ int riegos;
 int segundosdepantalla;
 int pantalla;
 int minutosregado;
-int humedadSuelo1;
-int humedadSuelo2;
-int humedadSueloProm;
+int humedadSuelo;
 
 
+
+boolean luz;
 boolean bomba;
 boolean regando;
 boolean conteo=false;
@@ -231,6 +232,21 @@ void guardarValoresdeGraficas(){
 
 }
 
+
+void estadosalidas(){
+
+   if((luz == HIGH)){
+      ledState = "ON";
+      digitalWrite(LUZ,HIGH);
+      }
+      else{
+      ledState = "OFF";
+      digitalWrite(LUZ,LOW);
+      }
+
+}
+
+
 void graficar(){
 
 File dt = SPIFFS.open("/data.txt", "w");
@@ -300,9 +316,8 @@ void tiempoActual(){
 
 String processor(const String& var){
 
-Serial.println(var);
   if(var == "STATE"){
-    if(digitalRead(bomba)){
+    if(ledState == "ON"){
       ledState = "ON";
     }
     else{
@@ -360,44 +375,22 @@ Serial.println(var);
 
 void verificarHumedad(){
 
-     humedadSueloProm  = ((analogRead(SENSORSUELO1))/40);
+     humedadSuelo  = (analogRead(SENSORSUELO1)/40);
 
-
-    humidityground= humedadSueloProm;
-
-    if(humedadSueloProm < humedadMinimaSuelo){
+    if(humedadSuelo < humedadMinimaSuelo){
     regando=true;
     digitalWrite(BOMBA, HIGH);
     }
-    if(humedadSueloProm >= humedadMinimaSuelo){
+    if(humedadSuelo >= humedadMinimaSuelo){
     regando=false;
     digitalWrite(BOMBA, LOW);
     segundosregado=0;
     minutosregado=0;    
     }
 
+   humidityground= humedadSuelo;
 
-// ESTE CODIGO SE USARIA SI TENEMOS DOS SENSORES DE HUMEDA DE SUELO. 
-
-   /*
-    humedadSuelo1  = ((analogRead(SENSORSUELO1))/40);
-    humedadSuelo2  = ((analogRead(SENSORSUELO2))/40);
-
-    humedadSueloProm = ((humedadSuelo1 + humedadSuelo2)/2);
-
-    humidityground= humedadSueloProm;
-
-    if(humedadSueloProm < humedadMinimaSuelo){
-    regando=true;
-    digitalWrite(BOMBA, HIGH);
-    }
-    if(humedadSueloProm >= humedadMinimaSuelo){
-    regando=false;
-    digitalWrite(BOMBA, LOW);
-    segundosregado=0;
-    minutosregado=0;    
-    }
-      */
+// ESTE CODIGO SE USARIA SI TENEMOS DOS SENSORES DE HUMEDA DE SUELO.       
 }
 
 
@@ -429,6 +422,9 @@ void regar(){
 
 
 void muestraHumyTemp(){
+
+  verificarHumedad();
+
    
    h = dht.readHumidity();
 
@@ -554,20 +550,8 @@ void muestraHuSuelo(){
   
   display.setCursor (60, 30);	                	
   display.setTextSize(2);		  	 	      
-  display.print(humedadSuelo1);	
-  display.print("%");
-  	          	                	
-  /*
-  display.setCursor (20,40);	                	
-  display.setTextSize(2);		  	 	      
-  display.print("H2: ");
-
-  display.setCursor (60,40);	                	
-  display.setTextSize(2);		  	 	      
-  display.print(humedadSuelo2);	
-  display.print("%");	 
-  */           
-
+  display.print(humedadSuelo);	
+  display.print("%"); 	          	                
   display.display();	        	        	
      	        	
 }
@@ -684,12 +668,16 @@ void setup()   {
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html",String(), false, processor);
   });
-  //  OTRAS RUTAS DE ACCESO EN LA WEB
+  ///  Rutas para la carga del index  ///
+
     server.on("/styleindex.css", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/styleindex.css");
   });
     server.on("/reset.css", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/reset.css");
+  });
+    server.on("/codeindex.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/codeindex.js");
   });
 
   // envio de imagenes//
@@ -711,16 +699,19 @@ void setup()   {
     request->send(SPIFFS, "/config.html", String(), false, processor);
     leerConfiguracion();
   });
-   server.on("/grafica", HTTP_GET, [](AsyncWebServerRequest *request){
+   server.on("/graficas.html", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/graficas.html", String(), false, processor);
   });
   server.on("/data.txt", HTTP_GET, [](AsyncWebServerRequest *request){
    request->send(SPIFFS, "/data.txt", String(), false, processor);
   });
-  server.on("/data.json", HTTP_GET, [](AsyncWebServerRequest *request){
-   request->send(SPIFFS, "/data.json");
+  server.on("/datos.json", HTTP_GET, [](AsyncWebServerRequest *request){
+   request->send(SPIFFS, "/datos.json");
   });
   // PASO DE VARIABLES
+    server.on("/luz", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", ledState.c_str());
+  });
     server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain", temperature.c_str());
   });
@@ -751,7 +742,7 @@ void setup()   {
     server.on("/humiditygroundMin", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain",humiditygroundMin.c_str());
   });
-   server.on("/humidityground", HTTP_GET, [](AsyncWebServerRequest *request){
+   server.on("/humidityland", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain",humidityground.c_str());
   });
     server.on("/encendidoLuz", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -766,7 +757,6 @@ void setup()   {
     server.on("/dias", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain",days.c_str());
   });
-
   // PARAMETROS DE CONFIGURACION BOTONES SUBIR Y BAJAR Y GUARDAR
    server.on("/bajarEncendido", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/config.html", String(), false, processor);
@@ -892,6 +882,27 @@ void setup()   {
 
 void loop() {
 
+    luz= LOW;
+    estadosalidas();
+    Serial.println(ledState);
+    delay(1000);
+
+    luz=HIGH;
+    estadosalidas();
+    Serial.println(ledState);
+    delay(1000);
+
+           if(pantalla==0){tiempoON();}
+           if(pantalla==1){muestraHumyTemp();}
+           if(pantalla==2){muestraHuSuelo();}
+           if(pantalla==3){}
+
+
+
+  Serial.println(WiFi.localIP());
+
+/*
+
          if(horas<tiempoEncendido){
            
            digitalWrite(LUZ,HIGH);
@@ -930,6 +941,8 @@ void loop() {
 
          }
           
+*/
+
        }
 
 

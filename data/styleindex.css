@@ -27,17 +27,21 @@ h1{
 #pantalla-dividida{
     display: flex;
 }
-.luz{
+.luzz{
     padding: 20px;
+    font-size: 1.2rem;
 }
 .temp{
     padding: 20px;
+    font-size: 1.2rem;
 }
 .hum{
     padding: 20px;
+    font-size: 1.2rem;
 }
 .humsuelo{
     padding: 20px;
+    font-size: 1.2rem;
 }
 .panel-de-control li{
     display: inline-block;

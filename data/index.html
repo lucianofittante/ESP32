@@ -11,16 +11,18 @@
                           <img id="chalas" src="image/chalas.jpg">
                           <h1>INDOOR</h1>
                         </header>
-                            <main> 
-                            
+                            <main>                           
                             <seccion id="pantalla-dividida">
-
                                 <div class="izquierda">  <!-- la clase derecha representa la parte dederecha de la pagina-->
-                                      <ul class="lista">
-                                          <li class="luz">LUZ:<strong>%STATE%</strong></li>                                                                               
-                                          <li class="temp">TEMP:<strong>%STATE%</strong></li>                                                                               
-                                          <li class="hum">HUM:<strong>%STATE%</strong></li>                                                                               
-                                          <li class="humsuelo">HUM SUELO:<strong>%STATE%</strong></li> 
+                                  <ul class="lista">
+                                          <li class="luzz">LUZ:<span id="luz">%STATE%</span>
+                                          </li>   
+                                          <li class="temp">Temperatura: <span id="temperature">%TEMPERATURE%</span><sup>&deg;C</sup>
+                                          </li>
+                                          <li class="hum">Humedad: <span id="humidity">%HUMIDITY%</span><sup>&#37;</sup>
+                                          </li>
+                                          <li class="humsuelo">Humedad suelo prom: <span id="humidityland">%HUMIDITYLAND%</span><sup>&#37;</sup>
+                                          </li>
                                       </ul>
                                       <ul class="panel-de-control">
                                         <li class="conf">
@@ -41,16 +43,16 @@
 
                                 <div class="derecha">  <!-- la clase derecha representa la parte dederecha de la pagina-->
                                 <h2> Graficas</h2>
+                                
                                 </div>  
 
                             </seccion>
 
                             </main>
 
+                        <script src="codeindex.js"></script>
+
                   </body>
-
-   
-
 
   </html>
 
