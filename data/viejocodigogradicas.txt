@@ -1,0 +1,139 @@
+
+<!--
+
+/*
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open('GET','datos.json', true);    
+        xhttp.send();
+
+        xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+              var ladataenjson = JSON.parse(this.responseText);
+ 
+                
+                console.log(ladataenjson);
+
+*/
+             
+///////////////////PASO DE VALORES DE TEMPERATURA DE TABLA A LA GRAFICA///////////////////////////
+/*
+                var t0=ladataenjson.t0;
+                var t1=ladataenjson.t1;
+                var t2=ladataenjson.t2;
+                var t3=ladataenjson.t3;
+                var t4=ladataenjson.t4;
+                var t5=ladataenjson.t5;
+                var t6=ladataenjson.t6;
+                var t7=ladataenjson.t7;
+                var t8=ladataenjson.t8;
+                var t9=ladataenjson.t9;
+                var t10=ladataenjson.t10;
+                var t11=ladataenjson.t11;
+                var t12=ladataenjson.t12;
+                var t13=ladataenjson.t13;
+                var t14=ladataenjson.t14;
+                var t15=ladataenjson.t15;
+                var t16=ladataenjson.t16;
+                var t17=ladataenjson.t17;
+                var t18=ladataenjson.t18;
+                var t19=ladataenjson.t19;
+                var t20=ladataenjson.t20;
+                var t21=ladataenjson.t21;
+                var t22=ladataenjson.t22;
+                var t23=ladataenjson.t23;
+*/
+                
+
+
+var ctx = document.getElementById('temperatura').getContext('2d');
+     var myChart = new Chart(ctx, {
+         type: 'line',
+            data: {
+               labels: ['0', '1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17','18', '19', '20', '21', '22','23'],
+                  datasets: [{
+                     label: 'TEMPERATURA',
+                     data: [10,11,12,13,14,11,11,11,12,13,14,11,12,13,14,11,11,13,14,12,13,10,11,12,13],
+                      backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                  ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)',
+                ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 50
+                }
+            }]
+        }
+    }
+});
+
+
+
+/*
+              } // fin del if de this.
+
+              
+        }   // fin del onreadystatechange   
+
+
+
+} */
+   
+
+//         fin de la funcion cargar datos
+
+
+-->

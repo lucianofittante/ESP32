@@ -4,9 +4,10 @@
                   <meta charset="UTF-8">
                   <link rel="stylesheet" href="reset.css">
                   <link rel="stylesheet" type="text/css" href="styleindex.css">
+                  <link rel="stylesheet" type="text/css" href="stylegraficas.css">
                   <title>INDOOR</title>
             </head>
-                  <body>
+                  <body onload="cargarDatos();">
                         <header>
                           <img id="chalas" src="image/chalas.jpg">
                           <h1>INDOOR</h1>
@@ -40,20 +41,18 @@
                                         </li> 
                                       </ul>
                                 </div>         
-
                                 <div class="derecha">  <!-- la clase derecha representa la parte dederecha de la pagina-->
-                                <h2> Graficas</h2>
-                                
+                                <h2> Graficas</h2>   
+                                <div class="grid-container">
+                                  <div><canvas id="temperatura" width="40" height="40";></canvas></div>
+                                  <div><canvas id="humedad" width="40" height="40";></canvas></div>
                                 </div>  
-
                             </seccion>
-
                             </main>
-
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
                         <script src="codeindex.js"></script>
-
+                        <script src="codegraf.js"></script>
                   </body>
-
   </html>
 
 

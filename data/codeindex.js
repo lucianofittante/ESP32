@@ -9,6 +9,8 @@
         
         console.log("graficas");
 
+        location.href ="graficas.html" 
+
       });
       botonred.addEventListener("click",function(event){
         event.preventDefault();
@@ -20,6 +22,8 @@
         event.preventDefault();
         
         console.log("config");
+
+        location.href ="configurar.html" 
 
     });
 
