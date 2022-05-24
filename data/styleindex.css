@@ -22,11 +22,12 @@ h1{
 .derecha{
     width: 50%;
     text-align: center;
+    margin-top: 15vh;
 }
 #pantalla-dividida{
     display: flex;
 }
-.luzz{
+.luz{
     padding: 20px;
     font-size: 1.2rem;
 }
@@ -52,9 +53,7 @@ h1{
     border-style: solid;
     border-width: 2px;
     border-radius: 5px 5px 5px 5px;
-
 }
-
 .conf:hover{
     border-color: rgb(116, 238, 120) ;
     font-size: 20px;

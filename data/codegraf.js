@@ -16,9 +16,6 @@ function cargarDatos(){
 
 */
 
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-
-
 /// TEMPERATURA AMBIENTE
 
 var ctx = document.getElementById('temperatura').getContext('2d');

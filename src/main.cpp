@@ -247,6 +247,26 @@ void estadosalidas(){
 }
 
 
+void leerarchivo(){
+
+File dt = SPIFFS.open("/datatxt.txt", "r");
+
+if (!dt) {
+Serial.println("Fallo apertura de archivo"); 
+}
+
+Serial.println("====== Escribiendo en el archivo SPIFFS =========");
+// write 10 strings to file
+serializeJson(G, dt);
+
+serializeJson(G, Serial);
+
+Serial.println();
+
+dt.close();
+
+}
+
 void graficar(){
 
 File dt = SPIFFS.open("/data.txt", "w");
@@ -266,7 +286,6 @@ Serial.println();
 dt.close();
 
 }
-
 
 void guardarConfiguracion(){
 
@@ -607,15 +626,15 @@ void leerConfiguracion(){
   tiempoApagado = (24 - tiempoEncendido);
 
 
-   tempMaxidiurna = temperaturaMaximaDiurna;
-   tempMinidiurna = temperaturaMinimaDiurna;
-   tempMaxiNocturna = temperaturaMaximaNocturna;
-   tempMiniNocturna = temperaturaMinimaNocturna;
-   humidityMax = humedadMaxima;
-   humidityMin = humedadMinima;
-   humiditygroundMax = humedadMaximaSuelo;
-   humiditygroundMin = humedadMinimaSuelo;
-   timeON = tiempoEncendido;
+  tempMaxidiurna = temperaturaMaximaDiurna;
+  tempMinidiurna = temperaturaMinimaDiurna;
+  tempMaxiNocturna = temperaturaMaximaNocturna;
+  tempMiniNocturna = temperaturaMinimaNocturna;
+  humidityMax = humedadMaxima;
+  humidityMin = humedadMinima;
+  humiditygroundMax = humedadMaximaSuelo;
+  humiditygroundMin = humedadMinimaSuelo;
+  timeON = tiempoEncendido;
 
   Serial.println("se leyeron los carretas");
   delay(200);
@@ -680,7 +699,7 @@ void setup()   {
     request->send(SPIFFS, "/codeindex.js");
   });
 
-  // envio de imagenes//
+  // envio de imagenes// otras paginas
   
     server.on("/image/chalas.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/image/chalas.jpg");
@@ -694,13 +713,37 @@ void setup()   {
     server.on("/image/graficas.jpg", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/image/graficas.jpg");
   });
-  
-    server.on("/config", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/config.html", String(), false, processor);
-    leerConfiguracion();
+
+  // carga de rutas configuracion
+
+   server.on("/configurar.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/configurar.html");
   });
+   server.on("/styleconfig.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/styleconfig.css");
+  });
+    server.on("/codeconfig.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/codeconfig.js");
+  });
+   server.on("/ladata.json", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/ladata.json");
+  });
+
+   server.on("/ladata.txt", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/ladata.txt");
+  });
+
+
+  // carga rutas de las graficas
+
    server.on("/graficas.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/graficas.html", String(), false, processor);
+    request->send(SPIFFS, "/graficas.html");
+  });
+    server.on("/stylegraficas.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/stylegraficas.css");
+  });
+    server.on("/codegraf.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/codegraf.js");
   });
   server.on("/data.txt", HTTP_GET, [](AsyncWebServerRequest *request){
    request->send(SPIFFS, "/data.txt", String(), false, processor);
@@ -881,6 +924,15 @@ void setup()   {
   }
 
 void loop() {
+
+  leerarchivo();
+
+  int i = G["t0"];
+
+
+ Serial.println(i);
+
+
 
     luz= LOW;
     estadosalidas();
