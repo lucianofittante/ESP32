@@ -1,0 +1,30 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: xtensa-esp32-elf-gcc.exe compilar archivo activo",
+            "command": "C:/Users/l8484/.platformio/packages/toolchain-xtensa-esp32@8.4.0+2021r2-patch3/bin/xtensa-esp32-elf-gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-mlongcalls",
+                ""
+            ],
+            "options": {
+                "cwd": "C:/Users/l8484/.platformio/packages/toolchain-xtensa-esp32@8.4.0+2021r2-patch3/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por el depurador."
+        }
+    ],
+    "version": "2.0.0"
+}

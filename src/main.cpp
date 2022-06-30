@@ -751,6 +751,7 @@ void setup()   {
   server.on("/datos.json", HTTP_GET, [](AsyncWebServerRequest *request){
    request->send(SPIFFS, "/datos.json");
   });
+  
   // PASO DE VARIABLES
     server.on("/luz", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain", ledState.c_str());
@@ -926,13 +927,6 @@ void setup()   {
 void loop() {
 
   leerarchivo();
-
-  int i = G["t0"];
-
-
- Serial.println(i);
-
-
 
     luz= LOW;
     estadosalidas();

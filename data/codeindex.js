@@ -27,12 +27,10 @@
 
     });
 
-
-    setInterval(updateValues, 500, "luz");
-    setInterval(updateValues, 10000, "temperature");
-    setInterval(updateValues, 10000, "humidity");
-    setInterval(updateValues, 10000, "humidityland");
-
+    setInterval(updateValues, 2000, "luz");
+    setInterval(updateValues, 2000, "temperature");
+    setInterval(updateValues, 2000, "humidity");
+    setInterval(updateValues, 2000, "humidityland");
 
     function updateValues(value) { 
       var xhttp = new XMLHttpRequest();
