@@ -22,7 +22,10 @@ h1{
 .derecha{
     width: 50%;
     text-align: center;
-    margin-top: 15vh;
+    display: flex;
+}
+.lista-graficas{
+    width: 200px;
 }
 #pantalla-dividida{
     display: flex;
